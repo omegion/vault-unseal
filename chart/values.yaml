@@ -1,0 +1,14 @@
+namespace: dev
+appsecret: myapp-secret
+schedule: '"30 10 * * *"'
+restartPolicy: OnFailure
+successfulJobsHistoryLimit: 3
+
+image:
+  name: XYZ
+  tag: 1.0.2
+  pullPolicy: IfNotPresent
+
+vault:
+  address: ""
+  shards: [ ]

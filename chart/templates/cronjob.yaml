@@ -1,0 +1,28 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  namespace: { { .Values.namespace } }
+  name: { { .Chart.Name } }
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  schedule: { { .Values.schedule } }
+  successfulJobsHistoryLimit: {{.Values.successfulJobsHistoryLimit}}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: { { .Chart.Name } }
+        spec:
+          containers:
+            - name: { { .Chart.Name } }
+              image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+              imagePullPolicy: { { .Values.image.pullPolicy } }
+              args:
+                - unseal
+                - --address={ { .Values.vault.address } }
+                { { - range .Values.vault.shards } }
+                - --shard: { { . } }
+                { { - end } }
+          restartPolicy: { { .Values.restartPolicy } }

@@ -3,12 +3,6 @@ Vault Auto Unseal
 </h1>
 
 <p align="center">
-  <a href="https://omegion.github.io/vault-unseal-docs/" target="_blank">
-    <img width="180" src="https://omegion.github.io/vault-unseal-docs/img/logo.svg" alt="logo">
-  </a>
-</p>
-
-<p align="center">
     <img src="https://img.shields.io/github/workflow/status/omegion/vault-unseal/Code%20Check" alt="Check"></a>
     <img src="https://coveralls.io/repos/github/omegion/vault-unseal/badge.svg?branch=master" alt="Coverall"></a>
     <img src="https://goreportcard.com/badge/github.com/omegion/vault-unseal" alt="Report"></a>
@@ -17,22 +11,20 @@ Vault Auto Unseal
 </p>
 
 ```shell
-CLI command to manage SSH keys stored on Bitwarden
+CLI command to automatically unseal Vault
 
 Usage:
   vault-unseal [command]
 
 Available Commands:
-  add         Add SSH key to Bitwarden.
-  get         Get SSH key from Bitwarden.
   help        Help about any command
+  unseal      Unseal Vault.
   version     Print the version/build number
 
 Flags:
   -h, --help   help for vault-unseal
 
 Use "vault-unseal [command] --help" for more information about a command.
-
 ```
 
 ## Requirements
@@ -41,16 +33,17 @@ Use "vault-unseal [command] --help" for more information about a command.
 
 ## What does it do?
 
-Injects SSL keys to `ssh-agent` stored in Bitwarden.
+Its a tool to unseal your Vault Server with given shards.
 
 ## How to use it
 
-1. Login to Bitwarden with `bw`.
-1. Create a folder named `SSHKeys` folder in your Bitwarden.
-1. Add your key pairs to Bitwarden
+1. Run `unseal` command with your Vault address and shards.
 
 ```shell
-vault-unseal add --name my-server-1 --private-key $PK_PATH --public-key $PUB_KEY
+vault-unseal unseal --address https://my.vault.server \
+  --shard=<SHARD_1>
+  --shard=<SHARD_2>
+  --shard=<SHARD_3>
 ```
 
 ## Improvements to be made

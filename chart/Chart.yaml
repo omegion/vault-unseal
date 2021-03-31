@@ -1,0 +1,12 @@
+apiVersion: v1
+name: vault-unseal-cronjob
+description: A chart for unseal Vault cron job
+version: 1.0.0
+keywords:
+  - cron
+home: "https://github.com/omegion"
+sources:
+  - "https://github.com/omegion"
+maintainers:
+  - name: omegion
+    email: oomegion@gmail.com
