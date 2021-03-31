@@ -37,8 +37,7 @@ Use "vault-unseal [command] --help" for more information about a command.
 
 ## Requirements
 
-* Have the [Bitwarden CLI tool](https://github.com/bitwarden/cli) installed and available in the `$PATH` as `bw`.
-* Have the `ssh-agent` running in the current session.
+* Vault Server
 
 ## What does it do?
 
