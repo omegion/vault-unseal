@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/omegion/vault-unseal/cmd"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -22,6 +23,7 @@ func RootCommand() *cobra.Command {
 }
 
 func main() {
-	root := RootCommand()
-	_ = root.Execute()
+	if err := RootCommand().Execute(); err != nil {
+		os.Exit(1)
+	}
 }
