@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/omegion/vault-unseal/cmd"
 	"os"
+
+	"github.com/omegion/vault-unseal/cmd"
 
 	"github.com/spf13/cobra"
 )
