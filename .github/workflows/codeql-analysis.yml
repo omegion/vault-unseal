@@ -1,6 +1,7 @@
 name: "Code scanning - scheduled (weekly)"
 
 on:
+  push:
   schedule:
     - cron: '0 15 * * 0'
 
