@@ -5,6 +5,8 @@ import (
 	"time"
 
 	"github.com/hashicorp/vault/api"
+
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -12,6 +14,14 @@ const (
 	maxRetries    = 3
 	timeout       = 15 * time.Second
 )
+
+//nolint:lll // go generate is ugly.
+//go:generate mockgen -destination=mocks/api_mock.go -package=mocks github.com/omegion/vault-unseal/internal/vault APIInterface
+// APIInterface is an interface for API.
+type APIInterface interface {
+	SealStatus() (api.SealStatusResponse, error)
+	Unseal(shard string) (api.SealStatusResponse, error)
+}
 
 // API is main struct of Vault.
 type API struct {
@@ -52,28 +62,6 @@ func (a API) SealStatus() (api.SealStatusResponse, error) {
 	return *status, nil
 }
 
-// UnsealWithShards unseals the Vault with given shards.
-func (a API) UnsealWithShards(shards []string) error {
-	for _, shard := range shards {
-		status, err := a.SealStatus()
-		if err != nil {
-			return err
-		}
-
-		if status.Sealed {
-			status, err = a.Unseal(shard)
-			if err != nil {
-				return err
-			}
-		} else {
-			fmt.Println("It is unsealed.")
-			break
-		}
-	}
-
-	return nil
-}
-
 // Unseal starts to unseal with given shard.
 func (a API) Unseal(shard string) (api.SealStatusResponse, error) {
 	status, err := a.Client.Sys().Unseal(shard)
@@ -81,7 +69,7 @@ func (a API) Unseal(shard string) (api.SealStatusResponse, error) {
 		return api.SealStatusResponse{}, err
 	}
 
-	fmt.Printf("Unsealed with shard: %s\n", shard)
+	log.Infoln(fmt.Sprintf("Unsealed with shard: %s\n", shard))
 
 	return *status, nil
 }

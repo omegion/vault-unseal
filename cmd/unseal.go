@@ -3,7 +3,8 @@ package cmd
 import (
 	"log"
 
-	"github.com/omegion/vault-unseal/pkg/vault"
+	"github.com/omegion/vault-unseal/internal/controller"
+	"github.com/omegion/vault-unseal/internal/vault"
 
 	"github.com/spf13/cobra"
 )
@@ -37,12 +38,13 @@ func Unseal() *cobra.Command {
 				return err
 			}
 
-			err = api.UnsealWithShards(shards)
-			if err != nil {
-				return err
-			}
+			vaultController := controller.NewVaultController(&api)
 
-			return nil
+			return vaultController.Unseal(
+				controller.UnsealOptions{
+					Shards: shards,
+				},
+			)
 		},
 	}
 

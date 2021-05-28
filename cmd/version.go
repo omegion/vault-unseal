@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/omegion/vault-unseal/pkg/info"
+	"github.com/omegion/vault-unseal/internal/info"
 
 	"github.com/spf13/cobra"
 )

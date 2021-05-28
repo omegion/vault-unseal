@@ -1,8 +1,13 @@
 export PATH := $(abspath ./vendor/bin):$(PATH)
 
+ifndef VERSION
+   GIT_VERSION = $(shell git describe --tags --always 2> /dev/null || echo 0.0.0)
+else
+   GIT_VERSION = $(VERSION)
+endif
+
 BASE_PACKAGE_NAME  = github.com/omegion/vault-unseal
-GIT_VERSION = $(shell git describe --tags --always 2> /dev/null || echo 0.0.0)
-LDFLAGS            = -ldflags "-X $(BASE_PACKAGE_NAME)/pkg/info.Version=$(GIT_VERSION)"
+LDFLAGS            = -ldflags "-X $(BASE_PACKAGE_NAME)/internal/info.Version=$(GIT_VERSION)"
 BUFFER            := $(shell mktemp)
 REPORT_DIR         = dist/report
 COVER_PROFILE      = $(REPORT_DIR)/coverage.out
