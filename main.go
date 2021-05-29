@@ -7,9 +7,10 @@ import (
 )
 
 func main() {
-	commander := cmd.Commander{}
+	commander := cmd.NewCommander()
+	commander.Setup()
 
-	if err := commander.Execute(); err != nil {
+	if err := commander.Root.Execute(); err != nil {
 		os.Exit(1)
 	}
 }

@@ -7,12 +7,17 @@ import (
 
 // Commander is a struct for command system.
 type Commander struct {
-	root     *cobra.Command
-	logLevel string
+	Root     *cobra.Command
+	LogLevel string
 }
 
-func (c *Commander) setRootCommand() {
-	c.root = &cobra.Command{
+func NewCommander() *Commander {
+	return &Commander{}
+}
+
+// SetRootCommand sets Root command.
+func (c *Commander) SetRootCommand() {
+	c.Root = &cobra.Command{
 		Use:          "vault-unseal",
 		Short:        "Vault Auto Unseal",
 		Long:         "CLI command to automatically unseal Vault",
@@ -21,13 +26,13 @@ func (c *Commander) setRootCommand() {
 }
 
 func (c *Commander) setPersistentFlags() {
-	c.root.PersistentFlags().String("logLevel", "info", "Set the logging level. One of: debug|info|warn|error")
+	c.Root.PersistentFlags().String("logLevel", "info", "Set the logging level. One of: debug|info|warn|error")
 }
 
 func (c *Commander) setLogger() {
-	c.logLevel, _ = c.root.Flags().GetString("logLevel")
+	c.LogLevel, _ = c.Root.Flags().GetString("logLevel")
 
-	level, err := log.ParseLevel(c.logLevel)
+	level, err := log.ParseLevel(c.LogLevel)
 	if err != nil {
 		log.Fatalf("Lethal damage: %s\n\n", err)
 	}
@@ -39,17 +44,15 @@ func (c *Commander) setLogger() {
 	})
 }
 
-// Execute is entrypoint for the commands.
-func (c *Commander) Execute() error {
+// Setup is entrypoint for the commands.
+func (c *Commander) Setup() {
 	cobra.OnInitialize(func() {
 		c.setLogger()
 	})
 
-	c.setRootCommand()
+	c.SetRootCommand()
 	c.setPersistentFlags()
 
-	c.root.AddCommand(Version())
-	c.root.AddCommand(Unseal())
-
-	return c.root.Execute()
+	c.Root.AddCommand(Version())
+	c.Root.AddCommand(Unseal())
 }
