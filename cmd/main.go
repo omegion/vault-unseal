@@ -35,7 +35,7 @@ func (c *Commander) setLogger() {
 
 	level, err := log.ParseLevel(c.LogLevel)
 	if err != nil {
-		log.Fatalf("Lethal damage: %s\n\n", err)
+		cobra.CheckErr(err)
 	}
 
 	log.SetLevel(level)

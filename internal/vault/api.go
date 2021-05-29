@@ -66,14 +66,14 @@ func (a API) SealStatus() (api.SealStatusResponse, error) {
 
 // Unseal starts to unseal with given shard.
 func (a API) Unseal(shard string) (api.SealStatusResponse, error) {
-	log.Debugln("Unsealing Vault.")
+	log.Debugln(fmt.Sprintf("Unsealing with shard: %s", shard))
 
 	status, err := a.Client.Sys().Unseal(shard)
 	if err != nil {
 		return api.SealStatusResponse{}, err
 	}
 
-	log.Infoln(fmt.Sprintf("Unsealed with shard: %s\n", shard))
+	log.Infoln(fmt.Sprintf("Unsealed with shard: %s", shard))
 
 	return *status, nil
 }
