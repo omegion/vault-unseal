@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+//nolint:unparam // output fails for some reason.
 func executeCommand(root *cobra.Command, args ...string) (output string, err error) {
 	buf := new(bytes.Buffer)
 	root.SetOut(buf)

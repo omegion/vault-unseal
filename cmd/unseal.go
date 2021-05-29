@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"log"
-
 	"github.com/omegion/vault-unseal/internal/controller"
 	"github.com/omegion/vault-unseal/internal/vault"
 
@@ -14,13 +12,13 @@ func setupGetCommand(cmd *cobra.Command) {
 	cmd.Flags().String("address", "", "Vault Address")
 
 	if err := cmd.MarkFlagRequired("address"); err != nil {
-		log.Fatalf("Lethal damage: %s\n\n", err)
+		cobra.CheckErr(err)
 	}
 
 	cmd.Flags().StringArray("shard", []string{}, "Shards to unseal")
 
 	if err := cmd.MarkFlagRequired("shard"); err != nil {
-		log.Fatalf("Lethal damage: %s\n\n", err)
+		cobra.CheckErr(err)
 	}
 }
 
