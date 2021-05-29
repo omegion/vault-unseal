@@ -11,6 +11,7 @@ type Commander struct {
 	LogLevel string
 }
 
+// NewCommander is a factory for Commander.
 func NewCommander() *Commander {
 	return &Commander{}
 }
