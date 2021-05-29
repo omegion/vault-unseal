@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Commander is a struct for command system.
 type Commander struct {
 	root     *cobra.Command
 	logLevel string

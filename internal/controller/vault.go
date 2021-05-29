@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+
 	"github.com/omegion/vault-unseal/internal/vault"
 
 	log "github.com/sirupsen/logrus"
