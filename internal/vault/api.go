@@ -54,6 +54,8 @@ func NewAPI(address string) (API, error) {
 
 // SealStatus returns status of seal.
 func (a API) SealStatus() (api.SealStatusResponse, error) {
+	log.Debugln("Getting Vault seal status.")
+
 	status, err := a.Client.Sys().SealStatus()
 	if err != nil {
 		return api.SealStatusResponse{}, err
@@ -64,6 +66,8 @@ func (a API) SealStatus() (api.SealStatusResponse, error) {
 
 // Unseal starts to unseal with given shard.
 func (a API) Unseal(shard string) (api.SealStatusResponse, error) {
+	log.Debugln("Unsealing Vault.")
+
 	status, err := a.Client.Sys().Unseal(shard)
 	if err != nil {
 		return api.SealStatusResponse{}, err
