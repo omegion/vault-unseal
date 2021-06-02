@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/omegion/vault-unseal/internal/vault"
-
 	log "github.com/sirupsen/logrus"
 )
 
@@ -36,12 +35,13 @@ func (c VaultController) Unseal(options UnsealOptions) error {
 		log.Debugln(fmt.Sprintf("Vault sealed: %t", status.Sealed))
 
 		if status.Sealed {
-			status, err = api.Unseal(shard)
+			_, err = api.Unseal(shard)
 			if err != nil {
 				return err
 			}
 		} else {
 			log.Infoln("Vault is already unsealed.")
+
 			break
 		}
 	}

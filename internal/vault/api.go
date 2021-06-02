@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/vault/api"
-
 	log "github.com/sirupsen/logrus"
 )
 

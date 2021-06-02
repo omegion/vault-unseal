@@ -3,7 +3,6 @@ package cmd
 import (
 	"github.com/omegion/vault-unseal/internal/controller"
 	"github.com/omegion/vault-unseal/internal/vault"
-
 	"github.com/spf13/cobra"
 )
 

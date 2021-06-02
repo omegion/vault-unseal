@@ -4,10 +4,9 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/golang/mock/gomock"
 	"github.com/hashicorp/vault/api"
 	"github.com/omegion/vault-unseal/internal/vault/mocks"
-
-	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 )
 
