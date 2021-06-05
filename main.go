@@ -5,7 +5,6 @@ import (
 
 	commander "github.com/omegion/cobra-commander"
 	"github.com/omegion/vault-unseal/cmd"
-
 	"github.com/spf13/cobra"
 )
 
