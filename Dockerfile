@@ -24,6 +24,6 @@ RUN make build TARGETOS=$TARGETOS TARGETARCH=$TARGETARCH VERSION=$VERSION
 
 FROM ${FROM_IMAGE}
 
-COPY --from=builder /app/dist/vault-unseal-linux /bin/vault-unseal
+COPY --from=builder /app/dist/vault-unseal /bin/vault-unseal
 
 ENTRYPOINT ["vault-unseal"]

@@ -17,14 +17,19 @@ Usage:
   vault-unseal [command]
 
 Available Commands:
+  completion  Generate the autocompletion script for the specified shell
   help        Help about any command
   unseal      Unseal Vault.
   version     Print the version/build number
 
 Flags:
-  -h, --help   help for vault-unseal
+      --config string      config file (default is ~/.<YOUR_CONFIG_NAME>/<CONFIG_FILE_NAME>.<CONFIG_FILE_TYPE>)
+  -h, --help               help for vault-unseal
+      --logFormat string   Set the logging format. One of: text|json (default "text") (default "text")
+      --logLevel string    Set the logging level. One of: debug|info|warn|error (default "info")
 
 Use "vault-unseal [command] --help" for more information about a command.
+
 ```
 
 ## Requirements
