@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/omegion/vault-unseal/internal/controller"
 	"github.com/omegion/vault-unseal/internal/vault"
 	"github.com/spf13/cobra"
@@ -14,7 +15,7 @@ func setupGetCommand(cmd *cobra.Command) {
 		cobra.CheckErr(err)
 	}
 
-	cmd.Flags().StringArray("shard", []string{}, "Shards to unseal")
+	cmd.Flags().StringSliceP("shard", "s", []string{}, "Shards to unseal")
 
 	if err := cmd.MarkFlagRequired("shard"); err != nil {
 		cobra.CheckErr(err)
@@ -28,7 +29,11 @@ func Unseal() *cobra.Command {
 		Short: "Unseal Vault.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			address, _ := cmd.Flags().GetString("address")
-			shards, _ := cmd.Flags().GetStringArray("shard")
+			shards, _ := cmd.Flags().GetStringSlice("shard")
+
+			for _, v := range shards {
+				fmt.Println(v)
+			}
 
 			api, err := vault.NewAPI(address)
 			if err != nil {

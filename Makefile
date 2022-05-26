@@ -7,17 +7,18 @@ else
 endif
 
 BASE_PACKAGE_NAME  = github.com/omegion/vault-unseal
-LDFLAGS            = -ldflags "-X $(BASE_PACKAGE_NAME)/internal/info.Version=$(GIT_VERSION)"
+LDFLAGS            = -ldflags "-buildid=$(GIT_VERSION)"
 BUFFER            := $(shell mktemp)
 REPORT_DIR         = dist/report
 COVER_PROFILE      = $(REPORT_DIR)/coverage.out
+TARGETOS		   = darwin
+TARGETARCH		   = amd64
+BINARY_NAME        = vault-unseal
+BINARY_PATH        = dist/$(BINARY_NAME)
 
 .PHONY: build
 build:
-	CGO_ENABLED=0 go build $(LDFLAGS) -installsuffix cgo -o dist/vault-unseal main.go
-
-build-for-container:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -a -installsuffix cgo -o dist/vault-unseal-linux main.go
+	CGO_ENABLED=0 GOOS="$(TARGETOS)" GOARCH="$(TARGETARCH)" go build $(LDFLAGS) -a -installsuffix cgo -o $(BINARY_PATH) main.go
 
 .PHONY: lint
 lint:
@@ -25,11 +26,15 @@ lint:
 	gofmt -l . | tee $(BUFFER)
 	@! test -s $(BUFFER)
 	go vet ./...
-	go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.40.1
+
+	# golangci-lint
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.2
 	@golangci-lint --version
 	golangci-lint run
-	go get -u golang.org/x/lint/golint
-	golint -set_exit_status ./...
+
+	# Statuscheck
+	go install honnef.co/go/tools/cmd/staticcheck@2022.1
+	staticcheck ./...
 
 .PHONY: test
 test:
@@ -47,6 +52,6 @@ cut-tag:
 .PHONY: release
 release: build-for-container
 	@echo "Releasing $(GIT_VERSION)"
-	docker build -t vault-unseal .
-	docker tag vault-unseal:latest omegion/vault-unseal:$(GIT_VERSION)
-	docker push omegion/vault-unseal:$(GIT_VERSION)
+	docker build -t $(BINARY_NAME) .
+	docker tag $(BINARY_NAME):latest omegion/$(BINARY_NAME):$(GIT_VERSION)
+	docker push omegion/$(BINARY_NAME):$(GIT_VERSION)
