@@ -25,9 +25,7 @@ sudo curl -fL https://github.com/omegion/vault-unseal/releases/download/{{.Env.V
 On Windows (Powershell)
 
 ```powershell
-Invoke-WebRequest -Uri https://github.com/omegion/vault-unseal/releases/download/{{.Env.VERSION}}
-/vault-unseal-windows-amd64 
--OutFile $home\AppData\Local\Microsoft\WindowsApps\vault-unseal.exe
+Invoke-WebRequest -Uri https://github.com/omegion/vault-unseal/releases/download/{{.Env.VERSION}}/vault-unseal-windows-amd64 -OutFile $home\AppData\Local\Microsoft\WindowsApps\vault-unseal.exe
 ```
 
 Otherwise, download one of the releases from the [release page](https://github.com/omegion/vault-unseal/releases/)
