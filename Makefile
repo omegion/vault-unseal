@@ -13,12 +13,11 @@ REPORT_DIR         = dist/report
 COVER_PROFILE      = $(REPORT_DIR)/coverage.out
 TARGETOS		   = darwin
 TARGETARCH		   = amd64
-BINARY_NAME        = vault-unseal
-BINARY_PATH        = dist/$(BINARY_NAME)
+BINARY_NAME        = dist/vault-unseal
 
 .PHONY: build
 build:
-	CGO_ENABLED=0 GOOS="$(TARGETOS)" GOARCH="$(TARGETARCH)" go build $(LDFLAGS) -a -installsuffix cgo -o $(BINARY_PATH) main.go
+	CGO_ENABLED=0 GOOS="$(TARGETOS)" GOARCH="$(TARGETARCH)" go build $(LDFLAGS) -a -installsuffix cgo -o $(BINARY_NAME) main.go
 
 .PHONY: lint
 lint:
@@ -48,10 +47,3 @@ cut-tag:
 	@echo "Cutting $(version)"
 	git tag $(version)
 	git push origin $(version)
-
-.PHONY: release
-release: build-for-container
-	@echo "Releasing $(GIT_VERSION)"
-	docker build -t $(BINARY_NAME) .
-	docker tag $(BINARY_NAME):latest omegion/$(BINARY_NAME):$(GIT_VERSION)
-	docker push omegion/$(BINARY_NAME):$(GIT_VERSION)
