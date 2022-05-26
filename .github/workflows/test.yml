@@ -9,61 +9,68 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: ^1.16
+          go-version: ^1.18
         id: go
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
-      - name: go test
-        run: go test -v -covermode=count -coverprofile=coverage.out ./...
 
-      - name: Convert coverage.out to coverage.lcov
-        uses: jandelgado/gcov2lcov-action@v1.0.8
+      - name: Run Unit tests
+        run: |
+          go test -race -covermode atomic -coverprofile=covprofile ./...
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage.lcov
-          flag-name: Unit Test
+      - name: Install goveralls
+        run: go install github.com/mattn/goveralls@latest
+
+      - name: Send coverage
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: goveralls -coverprofile=covprofile -service=github
 
   vet:
-    name: go vet and lint
+    name: go vet and statuscheck
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: ^1.16
+          go-version: ^1.18
         id: go
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Get dependencies
+      - name: go vet
         run: |
           go get -v -t -d ./...
-          go get -u golang.org/x/lint/golint
-      - name: go vet
-        run: go vet ./...
+          go vet ./...
 
-      - name: go lint
-        run: golint -set_exit_status ./...
+      - name: go staticcheck
+        uses: dominikh/staticcheck-action@v1.2.0
+        with:
+          version: "2022.1"
+          install-go: false
 
   golangci:
     name: golangci lint check
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v3
+        with:
+          go-version: ^1.18
+        id: go
+
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
+        uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.40.1
+          version: v1.46.2

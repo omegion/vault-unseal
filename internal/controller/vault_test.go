@@ -6,8 +6,9 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/hashicorp/vault/api"
-	"github.com/omegion/vault-unseal/internal/vault/mocks"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/omegion/vault-unseal/internal/vault/mocks"
 )
 
 func TestAPI_Unseal_Successful(t *testing.T) {
@@ -74,10 +75,6 @@ func TestAPI_Unseal_Unseal_Break(t *testing.T) {
 	vaultAPI := mocks.NewMockAPIInterface(ctrl)
 
 	vaultAPI.EXPECT().SealStatus().Return(api.SealStatusResponse{Sealed: false}, nil)
-	vaultAPI.EXPECT().Unseal(gomock.Any()).Return(
-		api.SealStatusResponse{Sealed: false},
-		errors.New("error"),
-	)
 
 	c := NewVaultController(vaultAPI)
 
