@@ -75,10 +75,6 @@ func TestAPI_Unseal_Unseal_Break(t *testing.T) {
 	vaultAPI := mocks.NewMockAPIInterface(ctrl)
 
 	vaultAPI.EXPECT().SealStatus().Return(api.SealStatusResponse{Sealed: false}, nil)
-	vaultAPI.EXPECT().Unseal(gomock.Any()).Return(
-		api.SealStatusResponse{Sealed: false},
-		errors.New("error"),
-	)
 
 	c := NewVaultController(vaultAPI)
 
