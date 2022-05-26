@@ -3,9 +3,9 @@ package main
 import (
 	"os"
 
-	commander "github.com/omegion/cobra-commander"
 	"github.com/omegion/vault-unseal/cmd"
 
+	commander "github.com/omegion/cobra-commander"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -28,14 +28,14 @@ func main() {
 		SilenceUsage: true,
 	}
 
-	c := commander.NewCommander(root).
+	cmdr := commander.NewCommander(root).
 		SetCommand(
 			cmd.Version(),
 			cmd.Unseal(),
 		)
-	c.SetConfig(getConfig(c.Root.Flags())).Init()
+	cmdr.SetConfig(getConfig(cmdr.Root.Flags())).Init()
 
-	if err := c.Execute(); err != nil {
+	if err := cmdr.Execute(); err != nil {
 		os.Exit(1)
 	}
 }
