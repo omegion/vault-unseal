@@ -6,7 +6,7 @@ require (
 	github.com/go-asset/build v0.0.1
 	github.com/golang/mock v1.6.0
 	github.com/hashicorp/vault/api v1.0.5-0.20210210214158-405eced08457
-	github.com/omegion/cobra-commander v0.11.0
+	github.com/omegion/cobra-commander v0.10.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/pflag v1.0.5
@@ -69,3 +69,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
+
+replace github.com/omegion/cobra-commander v0.10.0 => /Users/hakankurtulus/workspace/projects/cobra-commander

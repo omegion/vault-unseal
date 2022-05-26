@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/omegion/vault-unseal/internal/controller"
 	"github.com/omegion/vault-unseal/internal/vault"
-
 	"github.com/spf13/cobra"
 )
 
@@ -30,6 +30,10 @@ func Unseal() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			address, _ := cmd.Flags().GetString("address")
 			shards, _ := cmd.Flags().GetStringSlice("shard")
+
+			for _, v := range shards {
+				fmt.Println(v)
+			}
 
 			api, err := vault.NewAPI(address)
 			if err != nil {
