@@ -87,7 +87,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build
         run: |
-          make build TARGETOS="$GOOS" TARGETARCH="$GOARCH" VERSION="$VERSION" BINARY_NAME="$BINARY_NAME" BINARY_PATH="$BINARY_NAME"
+          make build TARGETOS="$GOOS" TARGETARCH="$GOARCH" VERSION="$VERSION" BINARY_NAME="$BINARY_NAME"
       - name: Release Notes
         run: |
           export VERSION=${{env.VERSION}}
