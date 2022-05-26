@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestName(t *testing.T) {
+func TestNewAPI_TLSSkipVerify(t *testing.T) {
 	testCases := []struct {
 		apiOptions            APIOptions
 		expectedTLSSkipVerify bool
