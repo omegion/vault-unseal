@@ -9,9 +9,8 @@ import (
 )
 
 const (
-	tlsSkipVerify = true
-	maxRetries    = 3
-	timeout       = 15 * time.Second
+	maxRetries = 3
+	timeout    = 15 * time.Second
 )
 
 //nolint:lll // go generate is ugly.
@@ -28,14 +27,20 @@ type API struct {
 	Client *api.Client
 }
 
+// APIOptions is options for API.
+type APIOptions struct {
+	Address       string
+	TLSSkipVerify bool
+}
+
 // NewAPI creates AI struct for Vault.
-func NewAPI(address string) (API, error) {
+func NewAPI(options APIOptions) (API, error) {
 	config := api.DefaultConfig()
-	config.Address = address
+	config.Address = options.Address
 	config.MaxRetries = maxRetries
 	config.Timeout = timeout
 
-	err := config.ConfigureTLS(&api.TLSConfig{Insecure: tlsSkipVerify})
+	err := config.ConfigureTLS(&api.TLSConfig{Insecure: options.TLSSkipVerify})
 	if err != nil {
 		return API{}, err
 	}

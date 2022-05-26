@@ -20,6 +20,8 @@ func setupGetCommand(cmd *cobra.Command) {
 	if err := cmd.MarkFlagRequired("shard"); err != nil {
 		cobra.CheckErr(err)
 	}
+
+	cmd.Flags().Bool("tls-skip-verify", true, "Skip TLS Verification for Vault")
 }
 
 // Unseal unseals Vault.
@@ -30,8 +32,12 @@ func Unseal() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			address, _ := cmd.Flags().GetString("address")
 			shards, _ := cmd.Flags().GetStringSlice("shard")
+			TLSSkipVerify, _ := cmd.Flags().GetBool("tsl-skip-verify")
 
-			api, err := vault.NewAPI(address)
+			api, err := vault.NewAPI(vault.APIOptions{
+				Address:       address,
+				TLSSkipVerify: TLSSkipVerify,
+			})
 			if err != nil {
 				return err
 			}
