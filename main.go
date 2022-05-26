@@ -4,11 +4,10 @@ import (
 	"os"
 
 	commander "github.com/omegion/cobra-commander"
-
-	"github.com/omegion/vault-unseal/cmd"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	"github.com/omegion/vault-unseal/cmd"
 )
 
 const (
