@@ -3,8 +3,9 @@ package controller
 import (
 	"fmt"
 
-	"github.com/omegion/vault-unseal/internal/vault"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/omegion/vault-unseal/internal/vault"
 )
 
 // VaultController is the entry controller.

@@ -6,8 +6,9 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/hashicorp/vault/api"
-	"github.com/omegion/vault-unseal/internal/vault/mocks"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/omegion/vault-unseal/internal/vault/mocks"
 )
 
 func TestAPI_Unseal_Successful(t *testing.T) {
