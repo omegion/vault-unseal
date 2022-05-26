@@ -11,16 +11,14 @@ Or, you can use the usual commands to install or upgrade:
 On OS X
 
 ```shell
-sudo curl -fL https://github.com/omegion/vault-unseal/releases/download/{{.Env.VERSION}}/vault-unseal-darwin-amd64 -o 
-/usr/local/bin/vault-unseal \
+sudo curl -fL https://github.com/omegion/vault-unseal/releases/download/{{.Env.VERSION}}/vault-unseal-darwin-amd64 -o /usr/local/bin/vault-unseal \
 && sudo chmod +x /usr/local/bin/vault-unseal
 ```
 
 On Linux
 
 ```shell
-sudo curl -fL https://github.com/omegion/vault-unseal/releases/download/{{.Env.VERSION}}/vault-unseal-linux-amd64 -o 
-/usr/local/bin/vault-unseal \
+sudo curl -fL https://github.com/omegion/vault-unseal/releases/download/{{.Env.VERSION}}/vault-unseal-linux-amd64 -o /usr/local/bin/vault-unseal \
 && sudo chmod +x /usr/local/bin/vault-unseal
 ```
 
