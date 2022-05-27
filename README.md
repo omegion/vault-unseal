@@ -51,6 +51,10 @@ vault-unseal unseal --address https://my.vault.server \
   --shard=<SHARD_3>
 ```
 
+## Vault Unseal GitHub Action
+
+You can use [Vault Unseal GitHub Action](https://github.com/omegion/vault-unseal-action) to create periodical action to be sure that your Vault is always unsealed.
+
 ## Improvements to be made
 
 * 100% test coverage.
