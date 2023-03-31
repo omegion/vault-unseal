@@ -33,6 +33,7 @@ func main() {
 			cmd.Version(),
 			cmd.Unseal(),
 		)
+
 	cmdr.SetConfig(getConfig(cmdr.Root.Flags())).Init()
 
 	if err := cmdr.Execute(); err != nil {

@@ -1,0 +1,29 @@
+---
+# Source: charts.omegion.dev/vault-unseal-cronjob
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: vault-unseal-cronjob
+  labels:
+    chart: "vault-unseal-cronjob-0.5.0"
+spec:
+  schedule: "*/30 * * * *"
+  successfulJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: vault-unseal-cronjob
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: vault-unseal-cronjob
+              image: "ghcr.io/omegion/vault-unseal:latest"
+              imagePullPolicy: IfNotPresent
+              args:
+                - unseal
+                - --address=https://vault.server.example.com
+                - --shard=1
+                - --shard=2
+                - --shard=3
