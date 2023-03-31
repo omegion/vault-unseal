@@ -1,0 +1,17 @@
+name: "Unseal Vault Server Every Hour"
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/omegion/vault-unseal:latest
+    steps:
+      - name: Unseal
+        run: |
+          vault-unseal unseal --address https://vault.example.com \
+            --shard X \
+            --shard Y \
+            --shard X
