@@ -13,9 +13,10 @@ const (
 	timeout    = 15 * time.Second
 )
 
+// APIInterface is an interface for API.
+//
 //nolint:lll // go generate is ugly.
 //go:generate mockgen -destination=mocks/api_mock.go -package=mocks github.com/omegion/vault-unseal/internal/vault APIInterface
-// APIInterface is an interface for API.
 type APIInterface interface {
 	SealStatus() (api.SealStatusResponse, error)
 	Unseal(shard string) (api.SealStatusResponse, error)
@@ -31,6 +32,7 @@ type API struct {
 type APIOptions struct {
 	Address       string
 	TLSSkipVerify bool
+	CustomHeaders map[string]string
 }
 
 // NewAPI creates AI struct for Vault.
@@ -48,6 +50,10 @@ func NewAPI(options APIOptions) (API, error) {
 	client, err := api.NewClient(config)
 	if err != nil {
 		return API{}, err
+	}
+
+	for key, val := range options.CustomHeaders {
+		client.AddHeader(key, val)
 	}
 
 	return API{
