@@ -15,7 +15,7 @@ const (
 
 // APIInterface is an interface for API.
 //
-//nolint:lll // go generate is ugly.
+
 //go:generate mockgen -destination=mocks/api_mock.go -package=mocks github.com/omegion/vault-unseal/internal/vault APIInterface
 type APIInterface interface {
 	SealStatus() (api.SealStatusResponse, error)
