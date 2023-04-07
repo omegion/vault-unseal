@@ -1,6 +1,6 @@
 ---
 # Source: charts.omegion.dev/vault-unseal-cronjob
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: vault-unseal-cronjob
@@ -23,7 +23,7 @@ spec:
               imagePullPolicy: IfNotPresent
               args:
                 - unseal
-                - --address=https://vault.server.example.com
+                - --address=http://vault.vault.svc.cluster.local:8200
                 - --shard=1
                 - --shard=2
                 - --shard=3
