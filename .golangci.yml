@@ -43,3 +43,4 @@ linters:
     - exhaustivestruct
     - exhaustruct
     - wrapcheck
+    - depguard

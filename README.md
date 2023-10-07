@@ -3,7 +3,7 @@ Vault Auto Unseal
 </h1>
 
 <p align="center">
-    <img src="https://img.shields.io/github/workflow/status/omegion/vault-unseal/Code%20Check" alt="Check"></a>
+    <img src="https://img.shields.io/github/workflow/status/omegion/vault-unseal/Tests" alt="Check"></a>
     <img src="https://coveralls.io/repos/github/omegion/vault-unseal/badge.svg?branch=master" alt="Coverall"></a>
     <img src="https://goreportcard.com/badge/github.com/omegion/vault-unseal" alt="Report"></a>
     <a href="http://pkg.go.dev/github.com/omegion/vault-unseal"><img src="https://img.shields.io/badge/pkg.go.dev-doc-blue" alt="Doc"></a>

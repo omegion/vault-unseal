@@ -1,5 +1,5 @@
-ARG GO_VERSION=1.18-alpine3.15
-ARG FROM_IMAGE=alpine:3.15
+ARG GO_VERSION=1.21-alpine3.18
+ARG FROM_IMAGE=alpine:3.18
 
 FROM golang:${GO_VERSION} AS builder
 
