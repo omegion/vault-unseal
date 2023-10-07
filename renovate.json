@@ -16,8 +16,7 @@
         "minor",
         "patch"
       ],
-      "automerge": true,
-      "automergeType": "branch"
+      "automerge": true
     }
   ]
 }
