@@ -7,7 +7,7 @@ toolchain go1.22.6
 require (
 	github.com/go-asset/build v0.0.1
 	github.com/golang/mock v1.6.0
-	github.com/hashicorp/vault/api v1.21.0
+	github.com/hashicorp/vault/api v1.22.0
 	github.com/omegion/cobra-commander v0.11.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.10.1
