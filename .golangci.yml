@@ -9,7 +9,6 @@ linters:
     - exhaustruct
     - wrapcheck
     - depguard
-    - noinlineerr
     - perfsprint
     - wsl
     - err113

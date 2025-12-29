@@ -36,7 +36,8 @@ func main() {
 
 	cmdr.SetConfig(getConfig(cmdr.Root.Flags())).Init()
 
-	if err := cmdr.Execute(); err != nil {
+	err := cmdr.Execute()
+	if err != nil {
 		os.Exit(1)
 	}
 }
