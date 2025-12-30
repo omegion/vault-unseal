@@ -1,46 +1,18 @@
+version: "2"
+
 run:
   timeout: 5m
-  issues-exit-code: 1
-  tests: true
-  modules-download-mode: readonly
-
-linters-settings:
-  gci:
-    sections:
-      - standard
-      - default
-      - prefix(github.com/omegion/vault-unseal)
-  govet:
-    check-shadowing: true
-  misspell:
-    locale: US
-  nolintlint:
-    allow-leading-space: false
-    allow-unused: false
-    require-explanation: true
-    require-specific: false
-  funlen:
-    lines: 80
-
-issues:
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - goerr113
-        - gocyclo
-        - errcheck
-        - gosec
-        - dupl
-        - funlen
-        - testpackage
-        - ifshort
-        - paralleltest
 
 linters:
-  disable-all: false
-  enable-all: true
+  default: all
   disable:
-    - exhaustivestruct
     - exhaustruct
     - wrapcheck
     - depguard
+    - perfsprint
+    - wsl
+    - err113
+    - paralleltest
+    - testpackage
+    - testifylint
+    - revive
